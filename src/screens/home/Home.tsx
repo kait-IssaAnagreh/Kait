@@ -9,10 +9,6 @@ interface Props {}
 export default (props: Props) => {
   const {switchLanguage} = useContext(LanguageContext);
 
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   const onPress = () => switchLanguage('ar');
 
   return (

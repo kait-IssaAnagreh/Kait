@@ -20,7 +20,7 @@ import DevMenu from './lib/helpers/dev-menu/DevMenu';
 import {RootNavigator} from './lib/navigation/root/Root';
 import {AuthProvider} from './lib/contexts/AuthContext';
 import {LanguageProvider} from './lib/contexts/LanguageContext';
-import {LoadingProvider} from './lib/contexts/LoadingContext';
+import Loading, {LoadingProvider} from './lib/contexts/LoadingContext';
 
 const App = () => {
   return (
@@ -33,6 +33,7 @@ const App = () => {
               <AuthProvider>
                 <RootNavigator />
               </AuthProvider>
+              <Loading />
             </LanguageProvider>
           </LoadingProvider>
         </NavigationContainer>
