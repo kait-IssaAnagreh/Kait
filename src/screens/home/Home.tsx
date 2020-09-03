@@ -1,20 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import {connect} from 'react-redux';
+import React, {useEffect, useContext} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import {changeLanguage} from '../../lib/actions';
 import {LanguageContext} from '../../lib/contexts/LanguageContext';
+import Card from '../../components/card/Card';
 
 interface Props {}
 
 export default (props: Props) => {
-  const [state, setState] = useState<any>({});
   const {switchLanguage} = useContext(LanguageContext);
 
   useEffect(() => {
@@ -25,9 +17,10 @@ export default (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={onPress} style={styles.square}>
-        <Text>Press Here</Text>
-      </TouchableWithoutFeedback>
+      <Card />
+      <TouchableOpacity onPress={onPress}>
+        <Text>Change Language</Text>
+      </TouchableOpacity>
     </View>
   );
 };
