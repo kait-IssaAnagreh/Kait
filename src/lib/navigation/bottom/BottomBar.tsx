@@ -4,7 +4,7 @@ import {Icon} from 'react-native-elements';
 import {homeNavigator} from '../stacks/Home';
 import common, {wp} from '../../helpers/react-native/common';
 import I18n from '../../locales';
-import {registrationNavigator} from '../stacks/Registration';
+import { menuNavigator } from '../stacks/Menu';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,20 +31,20 @@ export default () => {
         }}
       />
       <Tab.Screen
-        name={'registration'}
-        component={registrationNavigator}
+        name={'Menu'}
+        component={menuNavigator}
         options={{
-          tabBarLabel: I18n.t('tabs.registration'),
+          tabBarLabel: I18n.t('tabs.menu'),
           tabBarIcon: ({color, size}) => (
             <Icon
-              name={'organization'}
+              name={'menufold'}
               containerStyle={{
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              size={wp('5.75')}
+              size={wp('6.25')}
               color={color}
-              type="simple-line-icon"
+              type="antdesign"
             />
           ),
         }}

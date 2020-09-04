@@ -1,6 +1,5 @@
 import {I18nManager} from 'react-native';
 import I18n from 'i18n-js';
-import AsyncStorage from '@react-native-community/async-storage';
 
 // Import all locales
 import en from './en.json';

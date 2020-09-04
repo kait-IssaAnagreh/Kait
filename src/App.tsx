@@ -26,7 +26,7 @@ const App = () => {
   return (
     <Provider store={Store().store}>
       <PersistGate persistor={Store().persistor}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="dark-content" />
         <NavigationContainer>
           <LoadingProvider>
             <LanguageProvider>

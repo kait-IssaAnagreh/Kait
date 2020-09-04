@@ -1,6 +1,8 @@
 {
   "tabs": {
     "home": "Home",
+    "menu": "Menu",
+    "search": "Search",
     "registration": "Registration"
   }
 }
