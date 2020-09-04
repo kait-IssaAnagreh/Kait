@@ -1,29 +1,22 @@
 import Axios, { Method } from "axios";
 import _ from "lodash";
-import store from "../store";
 
 const API_BASE_URL = "";
 
-const fetchClient = (
+const onError = function (error: any) {
+  if (error.response) {
+    console.log("api request error:", error.response)
+  } else {
+    console.log('api request (some error happened while processing the request):', error.message);
+  }
+}
+
+const fetchClient = async (
   url: string,
   data?: any,
-  success?: any,
-  failure?: any,
   type?: Method,
   headers?: any,
 ) => {
-  const onSuccess = (response: any) => {
-    return response;
-  };
-  const onError = function (error: any) {
-    if (error.response) {
-      console.log("wrapper onError:", error.response)
-    } else {
-      console.log('wrapper (some error happened while processing the request):', error.message);
-    }
-    return Promise.reject(error.response || error.message);
-  }
-
   return Axios(`${API_BASE_URL}/${url}`, {
     method: _.isEmpty(type) ? (data ? "POST" : "GET") : type,
     data: data ? JSON.stringify(data) : null,
@@ -31,29 +24,42 @@ const fetchClient = (
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer `,
-      "Accept-Language":
-        store().getState().Language.language === "rtl" ? "ar" : "en",
       ...headers
     },
   })
-    .then((res: any) => {
-      onSuccess(res);
-      success && success(res.data);
-    })
-    .catch((e: any) => {
-      onError(e);
-      failure && failure(e.response || e.message);
-      return Promise.reject(e.response || e.message);
-    });
 };
 
 export const request = {
-  get: (url: string, success?: any, failure?: any, headers?: any) =>
-    fetchClient(url, null, success, failure, "get", headers),
-  post: (url: string, data?: any, success?: any, failure?: any, headers?: any) =>
-    fetchClient(url, data, success, failure, "post", headers),
-  patch: (url: string, data?: any, success?: any, failure?: any, headers?: any) =>
-    fetchClient(url, data, success, failure, "patch", headers),
-  put: (url: string, success?: any, failure?: any, headers?: any) =>
-    fetchClient(url, null, success, failure, "put", headers),
+  get: async (url: string, headers?: any) => {
+    try {
+      return await fetchClient(url, null, "get", headers)
+    } catch (e) {
+      onError(e);
+      throw e
+    }
+  },
+  post: async (url: string, data?: any, headers?: any) => {
+    try {
+      return await fetchClient(url, data, "post", headers)
+    } catch (e) {
+      onError(e);
+      throw e
+    }
+  },
+  patch: async (url: string, data?: any, headers?: any) => {
+    try {
+      return await fetchClient(url, data, "patch", headers)
+    } catch (e) {
+      onError(e);
+      throw e
+    }
+  },
+  put: async (url: string, headers?: any) => {
+    try {
+      return await fetchClient(url, null, "put", headers)
+    } catch (e) {
+      onError(e);
+      throw e
+    }
+  },
 };
