@@ -19,8 +19,10 @@ import DevMenu from './lib/helpers/dev-menu/DevMenu';
 import {RootNavigator} from './lib/navigation/root';
 import {AuthProvider} from './lib/contexts/AuthContext';
 import Loading, {LoadingProvider} from './lib/contexts/LoadingContext';
+import {useApi} from './lib/hooks/useApi';
 
 const App = () => {
+  useApi();
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
