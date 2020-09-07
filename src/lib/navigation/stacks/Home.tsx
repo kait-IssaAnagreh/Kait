@@ -1,34 +1,26 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Screens} from '../screens';
 import I18n from '../../locales';
 import {wp, hp} from '../../helpers/react-native/common';
-import Home from '../../../screens/home/Home';
-
+import Home from '../../../screens/Home';
+import {Screens} from '../../constants';
 const HomeStack = createStackNavigator();
-
-export const homeNavigator = ({route, navigation}: any) => {
+export const homeNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
         options={{
-          ...options(I18n.t('tabs.home')),
+          headerBackTitle: '',
+          headerTitle: I18n.t('tabs.home'),
+          headerBackTitleVisible: false,
+          gestureResponseDistance: {
+            horizontal: wp('100'),
+            vertical: hp('100'),
+          },
         }}
-        name={Screens.Home}
+        name={Screens.HOME}
         component={Home}
       />
     </HomeStack.Navigator>
   );
-};
-
-const options = (name: any) => {
-  return {
-    headerBackTitle: '',
-    headerTitle: name,
-    headerBackTitleVisible: false,
-    gestureResponseDistance: {
-      horizontal: wp('100'),
-      vertical: hp('100'),
-    },
-  };
 };

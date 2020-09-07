@@ -9,32 +9,27 @@
  */
 
 import React from 'react';
-import {StatusBar, View} from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 
-import Store from './lib/store';
+import {store, persistor} from './store';
 import DevMenu from './lib/helpers/dev-menu/DevMenu';
-import {RootNavigator} from './lib/navigation/root/Root';
+import {RootNavigator} from './lib/navigation/root';
 import {AuthProvider} from './lib/contexts/AuthContext';
-import {LanguageProvider} from './lib/contexts/LanguageContext';
 import Loading, {LoadingProvider} from './lib/contexts/LoadingContext';
 
 const App = () => {
   return (
-    <Provider store={Store().store}>
-      <PersistGate persistor={Store().persistor}>
-        <StatusBar barStyle="dark-content" />
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
         <NavigationContainer>
           <LoadingProvider>
-            <LanguageProvider>
-              <AuthProvider>
-                <RootNavigator />
-              </AuthProvider>
-              <Loading />
-            </LanguageProvider>
+            <AuthProvider>
+              <RootNavigator />
+            </AuthProvider>
+            <Loading />
           </LoadingProvider>
         </NavigationContainer>
         <DevMenu />

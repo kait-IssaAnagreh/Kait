@@ -1,10 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Screens} from '../screens';
 import I18n from '../../locales';
 import {wp, hp} from '../../helpers/react-native/common';
-import {searchNavigator} from './Search';
-import Menu from '../../../screens/menu/Menu';
+import {searchNavigator} from './search';
+import Menu from '../../../screens/Menu';
+import {Screens} from '../../constants';
 
 const MenuStack = createStackNavigator();
 
@@ -13,30 +13,24 @@ export const menuNavigator = () => {
     <MenuStack.Navigator>
       <MenuStack.Screen
         options={{
-          ...options(I18n.t('tabs.menu')),
+          headerBackTitle: '',
+          headerTitle: I18n.t('tabs.menu'),
+          headerBackTitleVisible: false,
+          gestureResponseDistance: {
+            horizontal: wp('100'),
+            vertical: hp('100'),
+          },
         }}
-        name={Screens.Menu}
+        name={Screens.MENU}
         component={Menu}
       />
       <MenuStack.Screen
         options={{
           headerShown: false,
         }}
-        name={Screens.SearchPage}
+        name={Screens.SEARCH_PAGE}
         component={searchNavigator}
       />
     </MenuStack.Navigator>
   );
-};
-
-const options = (name: any) => {
-  return {
-    headerBackTitle: '',
-    headerTitle: name,
-    headerBackTitleVisible: false,
-    gestureResponseDistance: {
-      horizontal: wp('100'),
-      vertical: hp('100'),
-    },
-  };
 };

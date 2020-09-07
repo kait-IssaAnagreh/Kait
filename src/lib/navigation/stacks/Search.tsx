@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Screens} from '../screens';
-import Search from '../../../screens/search/Search';
+import Search from '../../../screens/Search';
+import {Screens} from '../../constants';
 
 const SearchStack = createStackNavigator();
 
@@ -12,7 +12,7 @@ export const searchNavigator = () => {
         options={{
           headerShown: false,
         }}
-        name={Screens.Search}
+        name={Screens.SEARCH}
         component={Search}
       />
     </SearchStack.Navigator>

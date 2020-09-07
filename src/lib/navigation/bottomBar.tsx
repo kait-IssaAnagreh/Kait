@@ -1,10 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements';
-import {homeNavigator} from '../stacks/Home';
-import common, {wp} from '../../helpers/react-native/common';
-import I18n from '../../locales';
-import { menuNavigator } from '../stacks/Menu';
+import {homeNavigator} from './stacks/home';
+import common, {wp} from '../helpers/react-native/common';
+import I18n from '../locales';
+import {menuNavigator} from './stacks/menu';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ export default () => {
         component={homeNavigator}
         options={{
           tabBarLabel: I18n.t('tabs.home'),
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({color}) => (
             <Icon
               name={'home'}
               containerStyle={{
@@ -35,7 +36,7 @@ export default () => {
         component={menuNavigator}
         options={{
           tabBarLabel: I18n.t('tabs.menu'),
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({color}) => (
             <Icon
               name={'menufold'}
               containerStyle={{
@@ -57,12 +58,10 @@ const bottomNavBar_Styling: any = {
   scrollEnabled: true,
   showIcon: true,
   activeTintColor: 'red',
-  // inactiveTintColor: drawer.bottomBar.bottom_tabs_inactive,
   labelStyle: {
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    // ...texts.txt_bottom_navbar,
   },
   labelPosition: 'below-icon',
   style: {},
